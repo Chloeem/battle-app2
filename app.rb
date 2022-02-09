@@ -31,6 +31,9 @@ class Battle < Sinatra::Base
     erb :attack
   end
 
+  get '/points' do
+    erb :play
+  end
 
   run! if app_file == $0
 end

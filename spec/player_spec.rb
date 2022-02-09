@@ -1,9 +1,14 @@
-
-
 describe Player do
+  subject(:tsuki) { Player.new('Tsuki') }
+  subject(:luna) { Player.new('Luna') }
 
-subject(:tsuki) {Player.new('Tsuki')}
   it 'should return its name' do
-    expect(subject.name).to eq 'Tsuki'
+    expect(tsuki.name).to eq 'Tsuki'
+  end
+
+  describe '#hit_points' do
+    it 'returns the hit points' do
+      expect(tsuki.hit_points).to eq described_class::DEFAULT_HP
+    end
   end
 end
