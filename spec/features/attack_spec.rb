@@ -8,6 +8,7 @@ feature 'Attack' do
 
   scenario 'Attack player 2 and they lose hit points' do
     sign_in_and_play
+
     click_button 'Attack'
     click_button 'Ok'
     expect(page).not_to have_content 'Chloe: 100HP'
