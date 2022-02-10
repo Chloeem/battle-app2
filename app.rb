@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
-#require './lib/player'
+
 require File.join(File.dirname(__FILE__), 'lib', 'player.rb')
 
 
@@ -15,23 +15,21 @@ class Battle < Sinatra::Base
     erb :index
   end
 
-  post '/names' do
-    $player_1 = Player.new(params[:player_1])
-    $player_2 = Player.new(params[:player_2])
+  post '/names' do 
+    player_one = Player.new(params[:player_1])
+    player_two = Player.new(params[:player_2])
+    $game = Game.new(player_one, player_two)
     redirect '/play'
   end
 
   get '/play' do
-    @player_1 = $player_1.name
-    @player_2 = $player_2.name
-    @player_two_hp = $player_2.hit_points
+    @game = $game
     erb :play
   end
 
   post '/attack' do
-    @player_1 = $player_1.name
-    @player_2 = $player_2.name
-    Game.new.attack($player_2)
+    @game = $game
+    @game.attack(@game.player_two)
     erb(:attack)
   end
 
